@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/styles.css" /><meta charset="utf-8">
+<title>hping API</title>
+<style type="text/css">
+body {
+background-color:rgb(51, 153, 153);
+}
+hr {
+clear:both;
+margin: 40px 0;
+color: #fff;
+border:0;
+border-bottom:1px dashed #fff;
+padding-top:10px;
+}
+.wrap {
+width: 800px;
+margin: 0 auto;
+height: 200px;
+color: #FFF;
+}
+.main > .left {
+width: 250px !important;
+float: left;
+}
+.main > .right {
+width: 550px !important;
+float: right;
+text-align: right;
+</style>
+<script type="text/javascript">
+function cDI(d) {
+if(d.cleared) { return; }
+d.cleared = true;
+d.value = '';
+d.style.color = '#000000';
+}
+</script>
+</head>
+
+<body>
+<ul>
+<li class="left">
+<a href="/"><h1>hping</h1></a>
+</li>
+<!--li>
+<a href="features/">FEATURES</a>
+</li>
+<li>
+<a href=""> </a>
+</li-->
+<li class="right">
+<form action="/" method="get" class="right">
+<input type="text" name="s" id="domain_input" value="ismysiteonline.com" onclick="cDI(this);" />
+<input type="submit" style="display:none;" />
+</form>
+</li>
+</ul>
+<div class="main">
+<div class="left" style="font-weight:bolder; font-size: 24px;">Resource</div>
+<div class="right" style="font-weight:bolder; font-size: 24px;">Description</div>
+<hr />
+<div class="left" style="font-weight:bold;"><a href="/api/ping.php?s=hping.thesp.info">GET /api/ping.php?s=url</a></div>
+<div class="right" style="font-weight:bold;">Pings $s 3 times if it is a valid URL. Valid URLs are resolved and are only considered valid if the IP begins with "fc". Returns 0 if offline, 1 if online, 2 if invalid or 3 if $s is not set.</div>
+<hr />
+<div class="left" style="font-weight:bold;"><a href="/api/dns.php?s=hping.thesp.info">GET /api/dns.php?s=url</a></div>
+<div class="right" style="font-weight:bold;">Resolves $s to an IPv6 address, using only root DNS. Returns IPv6 address.</div>
+</div>
+</body>
+</html>
+
