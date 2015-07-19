@@ -42,7 +42,12 @@ class hLatency {
                 $output = substr($ip, $start,$length);
                 $ip =  $output;
             }
-            $ip = str_replace(array("[","]","/"),"",$ip);
+            if (stristr($ip, "/")) {
+                $end = strpos($ip, '/');
+                $output = substr($ip, 0,$end);
+                $ip =  $output;
+            }
+            $ip = str_replace(array("[","]"),"",$ip);
             $input = filter_var($ip, FILTER_SANITIZE_URL);
             $ip = $this->resolve($input);
             if ($ip == "NULL") {

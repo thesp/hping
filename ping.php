@@ -35,17 +35,18 @@ class hPing {
             }
         }
         public function clean($ip) {
-            $ip = str_replace(array("[","]"),"",$ip);
             if (stristr($ip, "//")) {
                 $start = strpos($ip, '//')+2;
-                    if(strchr($ip, "/", $start+3)) {
-                        $length = strpos($ip, '/')-$start+1;
-                    } else {
-                        $length = strlen($ip)-$start;
-                    }
+                $length = strlen($ip) - $start;
                 $output = substr($ip, $start,$length);
                 $ip =  $output;
             }
+            if (stristr($ip, "/")) {
+                $end = strpos($ip, '/');
+                $output = substr($ip, 0,$end);
+                $ip =  $output;
+            }
+            $ip = str_replace(array("[","]"),"",$ip);
             $input = filter_var($ip, FILTER_SANITIZE_URL);
             $ip = $this->resolve($input);
             if ($ip == "NULL") {
