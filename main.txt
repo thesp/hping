@@ -1,3 +1,0 @@
-<div class="miss">
-	<p>Platform monitoring and insight into your network.</p>
-</div>
