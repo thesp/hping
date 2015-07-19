@@ -50,16 +50,16 @@
 			$server = $_GET['s'];
 			echo("</div>");
 			switch ($r) {
-				case 0:
+				case -1:
 					echo ("<div class='main'><p class='status'>$server is  offline</p></div>");
 				break;
-				case 1:
-					echo ("<div class='main'><p class='status'><a href='http://$server/'>$server</a> is online</p></div>");
-				break;
-				case 2:
+				/*case 1:
+				*	echo ("<div class='main'><p class='status'><a href='http://$server/'>$server</a> is online</p></div>");
+				break;*/
+				case -2:
 					echo ("<div class='main'><p class='status'>This is not a valid URL</p></div>");
 				break;
-				case 3:
+				case -3:
 					echo ("<div class='main' id='a'><img src='hping.png'><p id='m'>We provide platform monitoring and insight into the network.</p></div>");
 				break;
 				default:

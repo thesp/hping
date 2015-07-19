@@ -2,7 +2,7 @@
     /*
     *    latency.php
     *    Author: Thesp
-    *    Version: 2.0.0
+    *    Version: 2.0.1
     *    Returns:
     *       0 : Offline
     *       2 : Invalid URL
@@ -13,17 +13,17 @@
         public function newPing($s) {
             if(isset($s) && $s != "") {
                 $server = $this->clean($s);
-                if($server == 2) {
-                    return 2;
+                if($server == -2) {
+                    return -2;
                 }
                 $r = $this->ping($server);
-                if($r != 0) {
+                if($r != -1) {
                     return $r;
                 } else {
-                    return 0;
+                    return -1;
                 }
             } else {
-                return 3;
+                return -3;
             }
         }
         public function ping($server) {
@@ -32,7 +32,7 @@
             if($result == 0) {
                 return $o[4];
             } else {
-                return 0;
+                return -1;
             }
         }
         public function clean($ip) {
@@ -56,7 +56,7 @@
             if (strtolower(substr($ip, 0, 2)) === "fc") {
                 return $ip;
             }
-            return 2;
+            return -2;
         }
         public function resolve($url) {
             if(isset($url)) {

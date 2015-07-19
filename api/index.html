@@ -69,7 +69,7 @@ d.style.color = '#000000';
 <div class="right" style="font-weight:bold;">Resolves $s to an IPv6 address, using only root DNS. Returns IPv6 address.</div>
 <hr />
 <div class="left" style="font-weight:bold;"><a href="/api/dns.php?s=fcbf:efd5:d2e4:a4f5:32ed:4aca:f3d9:b80b">GET /api/latency.php?s=url</a></div>
-<div class="right" style="font-weight:bold;">Pings $s 3 times if it is a valid URL. Valid URLs are resolved and are only considered valid if the IP begins with "fc". Returns 0 if offline, 2 if invalid or 3 if $s is not set. If $s is online it will return the latency (in milliseconds).</div>
+<div class="right" style="font-weight:bold;">Pings $s 3 times if it is a valid URL. Valid URLs are resolved and are only considered valid if the IP begins with "fc". Returns -1 if offline, -2 if invalid or -3 if $s is not set. If $s is online it will return the latency (in milliseconds).</div>
 </div>
 </body>
 </html>

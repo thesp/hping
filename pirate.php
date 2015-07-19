@@ -48,16 +48,16 @@
 			$r = $hping->newPing($_GET['s']);
 			$server = $_GET['s'];
 			switch ($r) {
-				case 0:
+				case -1:
 					echo ("<div class='main'><p class='status'>This be no Man-O-War!</p></div>");
 				break;
-				case 1:
-					echo ("<div class='main'><p class='status'>Thar <a href='http://$server/'>she</a> blows!</p></div>");
-				break;
-				case 2:
+				/*case 1:
+				*	echo ("<div class='main'><p class='status'>Thar <a href='http://$server/'>she</a> blows!</p></div>");
+				*/break;
+				case -2:
 					echo ("<div class='main'><p class='status'>Shiver me timbers! Swab that Poop deck!</p></div>");
 				break;
-				case 3:
+				case -3:
 					echo ("<div class='miss' id='a'><img src='hping.png'><p>Yer Crow's nest in Davy Jones's Locker!</p></div>");
 				break;
 				default:
