@@ -10,58 +10,96 @@ if(!isset($_GET['server'])) {
 if(!isset($_GET['s'])) {
         $_GET['s'] = $_GET['server'];
 }
-require_once "ping.php";
+require_once "latency.php";
 ?>
 <!DOCTYPE html>
 <html>
-        <head>
-                <title><?php  if($_GET['s'] == '') { echo 'Home'; } else { echo $_GET['s']; } ?></title>
-                <link rel="stylesheet" type="text/css" href="./styles.css" />
-                <script type="text/javascript">
-                        function cDI(d) {
-                                if(d.cleared) { return; }
-                                d.cleared = true;
-                                d.value = '';
-                                d.style.color = '#000000';
-                        }
-                </script>
-        </head>
-        <body>
-                <ul>
-                        <li class="left">
-                                <a href="."><h1>hping</h1></a>
-                        </li>
-                        <!--li>
-                                <a href="features/">FEATURES</a>
-                        </li>
-                        <li>
-                                <a href=""> </a>
-                        </li-->
-                        <li class="right">
-                                <form action="" method="get" class="right">
-                                        <input type="text" name="s" id="domain_input" value="ismysiteonline.com" onclick="cDI(this);" />
-                                        <input type="submit" style="display:none;" />
-                                </form>
-                        </li>
-                </ul>
-                <?php
-			$hping = new Hping;
-                        $r = $hping->newPing($_GET['s']);
-                        $server = $_GET['s'];
-                        switch ($r) {
-        	                case 0:
-	                                echo ("<div class='main'><p class='status'>$server is  offline</p></div>");
-                	                break;
-                        	case 1:
-                                	echo ("<div class='main'><p class='status'><a href='http://$server/'>$server</a> is online</p></div>");
-                                       	break;
-                       	        case 2:
-                                	echo ("<div class='main'><p class='status'>This is not a valid URL</p></div>");
-                                	break;
-                        	case 3:
-                                	include "main.txt";
-							break;
-                        }
-                ?>
-        </body>
+	<head>
+		<title>hping - <?php if($_GET['server'] == '') { echo 'Home'; } else { echo $_GET['server']; } ?></title>
+		<link rel="stylesheet" type="text/css" href="./styles.css" />
+		<script type="text/javascript">
+			function cDI(d) {
+				if(d.cleared) { return; }
+				d.cleared = true;
+				d.value = '';
+				d.style.color = '#000000';
+			}
+		</script>
+	</head>
+ <body>
+		<ul>
+			<li class="left">
+				<a href="."><h1>hping</h1></a>
+			</li>
+			<!--li>
+				<a class="s" href="features/">FEATURES</a>
+			</li-->
+			<li class="right">
+				<form action="" method="get" class="right">
+					<input type="text" name="server" id="domain_input" value="ismysiteonline.com" onclick="cDI(this);" />
+					<input type="submit" style="display:none;" />
+				</form>
+			</li>
+		</ul>
+        <?php
+        	echo("<div class='output'>");
+		    $hLatency = new hLatency;
+            $r = $hLatency->newPing($_GET['s']);
+            $server = $_GET['s'];
+        	echo("</div>");
+            switch ($r) {
+    	        case 0:
+                    echo ("<div class='main'><p class='status'>$server is  offline</p></div>");
+                break;
+                case 1:
+                 	echo ("<div class='main'><p class='status'><a href='http://$server/'>$server</a> is online</p></div>");
+                break;
+               	case 2:
+                   	echo ("<div class='main'><p class='status'>This is not a valid URL</p></div>");
+                break;
+                case 3:
+                   	echo ("<div class='main' id='a'><img src='hping.png'><p id='m'>We provide platform monitoring and insight into the network.</p></div>");
+			    break;
+			    default:
+                    $r = round($r);
+       	   		    echo ("<div class='main'><p class='status'><a href='http://$server/'>$server</a> is online with a latency of $r milliseconds</p></div>");
+		    	break;
+            }
+        ?>
+		<!--hr />
+		<div class="left">
+			<p>Site/Design by Thesp<br />Logo by dansup</p>
+		<div class="right">
+			<p></p>
+		</div-->
+	</body>
 </html>
+<?php
+	function clean($ip) {
+				$input = $ip;
+    if((strstr($input,'[')) && (strstr($input,']'))) {
+     $start =strpos($input, '[')+1;
+     $length = strpos($input, ']')-$start;
+     $output = substr($input, $start,$length);
+     return $output;
+    } else if ((strstr($input, 'http://'))) {
+     $start =strpos($input, '/', 6)+1;
+     $length = strlen($input)-$start;
+     if(strpos($input, '/', 8)) {
+     	$length = strpos($input, '/', 8)-$start;
+					}
+     $output = substr($input, $start,$length);
+     return $output;
+    } else {
+					return str_replace(array("http:","/","[","]"),"",$ip);
+				}
+	}
+	function check($ip) {
+		$ipp = $ip;
+		if(substr_count($ipp, ":") == 7) {
+			return "[$ipp]";
+		} else {
+			return $ip;
+		}
+	}
+?>

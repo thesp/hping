@@ -1,3 +1,0 @@
-<div class="miss">
-	<p>Yer Crow's nest in Davy Jones's Locker!</p>
-</div>

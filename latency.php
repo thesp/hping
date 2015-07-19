@@ -1,15 +1,15 @@
 <?php
 /*
- *    /api/ping.php
+ *    latency.php
  *    Author: Thesp
- *    Version: 0.X.X
+ *    Version: 2.0.0
  *    Returns:
  *       0 : Offline
- *       1 : Online
  *       2 : Invalid URL
  *       3 : $S not set
+ *       Anything else : latency in milliseconds
  */
-class hPing {
+class hLatency {
         public function newPing($s) {
             if(isset($s) && $s != "") {
                 $server = $this->clean($s);
@@ -28,28 +28,25 @@ class hPing {
         }
         public function ping($server) {
             $str = exec("ping6 -c 3 -w 3 ".escapeshellarg($server), $ect, $result);
+            $o = explode("/", $str);
             if($result == 0) {
-                return 1;
+                return $o[4];
             } else {
                 return 0;
             }
         }
         public function clean($ip) {
-            $ip = str_replace(array("[","]"),"",$ip);
             if (stristr($ip, "//")) {
                 $start = strpos($ip, '//')+2;
-                    if(strchr($ip, "/", $start+3)) {
-                        $length = strpos($ip, '/')-$start+1;
-                    } else {
-                        $length = strlen($ip)-$start;
-                    }
+                $length = strlen($ip) - $start;
                 $output = substr($ip, $start,$length);
                 $ip =  $output;
             }
+            $ip = str_replace(array("[","]","/"),"",$ip);
             $input = filter_var($ip, FILTER_SANITIZE_URL);
             $ip = $this->resolve($input);
             if ($ip == "NULL") {
-                $ip =  $output;
+                $ip =  $input;
             }
             if (strtolower(substr($ip, 0, 2)) === "fc") {
                 return $ip;
