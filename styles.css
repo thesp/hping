@@ -38,14 +38,14 @@ input {
         clear: none;
 }
 .main {
-        margin: 44px auto 0 auto;
-        width: 632px;
-        height: 100px;
-        background-image: linear-gradient(to top, #DDDDDD, #FFFFFF);
-        color: #656565;
-        border: 1px solid #D9D9D9;
-        border-radius: 17px;
+    margin: 44px auto 0 auto;
+    width: 632px;
+    background-image: linear-gradient(to top, #DDDDDD, #FFFFFF);
+    color: #656565;
+    border: 1px solid #D9D9D9;
+    border-radius: 17px;
 	clear: both;
+	padding:25px 0 25px 0;
 }
 .main a:link, .main a:focus, .main a:active, .main a:visited {
 	color: #777 !important;
@@ -60,7 +60,6 @@ p.status {
 	clear: both;
 	color: #555;
 	padding: 0;
-	margin: 25px 0 0 0;
 	font-size: 40px;
 }
 .left {
@@ -95,7 +94,7 @@ li .s {
 	vertical-align:-11px;
 	font-size: 13px;
 }
-.miss {
+#a {
 	margin: 44px auto 0 auto;
 	width: 632px;
 	height: 305px;
@@ -105,7 +104,7 @@ li .s {
 	border-radius: 17px;
 	clear:both;
 }
-.miss p {
+#a p {
 	margin-right: 17px;
 	padding-right: 0px;
 	float: right;
@@ -115,7 +114,7 @@ li .s {
 	height: 56px;
 	text-align: right;
 }
-.miss img {
+#a img {
 	width: 117px;
 	float: left;
 	margin-left: 65px;

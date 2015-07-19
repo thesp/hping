@@ -31,11 +31,11 @@ require_once "latency.php";
 			<li class="left">
 				<a href="."><h1>hping</h1></a>
 			</li>
-			<li>
+			<!--li>
 				<a class="s" href="features/">FEATURES</a>
-			</li>
+			</li-->
 			<li class="right">
-				<form action="." method="get" class="right">
+				<form action="" method="get" class="right">
 					<input type="text" name="server" id="domain_input" value="ismysiteonline.com" onclick="cDI(this);" />
 					<input type="submit" style="display:none;" />
 				</form>
@@ -56,10 +56,11 @@ require_once "latency.php";
                    	echo ("<div class='main'><p class='status'>This is not a valid URL</p></div>");
                 break;
                 case 3:
-                   	echo ("<div class='miss'><img src='hping.png'><p>We provide platform monitoring and insight into the network.</p></div>");
+                   	echo ("<div class='main' id='a'><img src='hping.png'><p id='m'>We provide platform monitoring and insight into the network.</p></div>");
 			    break;
 			    default:
-			    	echo $r;
+                    $r = round($r);
+       	   		    echo ("<div class='main'><p class='status'><a href='http://$server/'>$server</a> is online with a latency of $r milliseconds</p></div>");
 		    	break;
             }
         ?>
