@@ -49,16 +49,7 @@ class hPing {
             $input = filter_var($ip, FILTER_SANITIZE_URL);
             $ip = $this->resolve($input);
             if ($ip == "NULL") {
-                if (stristr($input, "//")) {
-                    $start = strpos($input, "//")+2;
-                        if(strchr($input, "//", $start+1) >= $start+1) {
-                            $length = strpos($input, '/')-$start+1;
-                        } else {
-                            $length = strlen($input)-$start;
-                        }
-                    $output = substr($input, $start,$length);
-                    $input =  $output;
-                }
+                $ip =  $output;
             }
             if (strtolower(substr($ip, 0, 2)) === "fc") {
                 return $ip;
