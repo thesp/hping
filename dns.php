@@ -24,7 +24,7 @@ class hResolve {
         $ip = str_replace(array("[","]"),"",$ip);
         if (stristr($ip, "//")) {
             $start = strpos($ip, '//')+2;
-                if(strchr($ip, "//", $start+1) >= $start+1) {
+                if(strchr($ip, "/", $start+3)) {
                     $length = strpos($ip, '/')-$start+1;
                 } else {
                     $length = strlen($ip)-$start;

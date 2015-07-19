@@ -36,21 +36,17 @@ class hLatency {
             }
         }
         public function clean($ip) {
-            $ip = str_replace(array("[","]"),"",$ip);
             if (stristr($ip, "//")) {
                 $start = strpos($ip, '//')+2;
-                    if(strchr($ip, "//", $start+1) >= $start+1) {
-                        $length = strpos($ip, '/')-$start+1;
-                    } else {
-                        $length = strlen($ip)-$start;
-                    }
+                $length = strlen($ip) - $start;
                 $output = substr($ip, $start,$length);
                 $ip =  $output;
             }
+            $ip = str_replace(array("[","]","/"),"",$ip);
             $input = filter_var($ip, FILTER_SANITIZE_URL);
             $ip = $this->resolve($input);
             if ($ip == "NULL") {
-                $ip =  $output;
+                $ip =  $input;
             }
             if (strtolower(substr($ip, 0, 2)) === "fc") {
                 return $ip;

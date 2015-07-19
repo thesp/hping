@@ -61,6 +61,7 @@ p.status {
 	color: #555;
 	padding: 0;
 	font-size: 40px;
+    word-wrap: break-word;
 }
 .left {
 	float:left;
@@ -119,4 +120,12 @@ li .s {
 	float: left;
 	margin-left: 65px;
 	margin-top: 115px;
+}
+.output {
+	max-width: 250px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding: 10px 10px 10px 10px;
+	text-align: center;
 }

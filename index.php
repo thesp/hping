@@ -42,9 +42,11 @@ require_once "latency.php";
 			</li>
 		</ul>
         <?php
+        	echo("<div class='output'>");
 		    $hLatency = new hLatency;
             $r = $hLatency->newPing($_GET['s']);
             $server = $_GET['s'];
+        	echo("</div>");
             switch ($r) {
     	        case 0:
                     echo ("<div class='main'><p class='status'>$server is  offline</p></div>");
