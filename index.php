@@ -10,7 +10,7 @@ if(!isset($_GET['server'])) {
 if(!isset($_GET['s'])) {
         $_GET['s'] = $_GET['server'];
 }
-require_once "ping.php";
+require_once "latency.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,25 +41,28 @@ require_once "ping.php";
 				</form>
 			</li>
 		</ul>
-                <?php
-					$hping = new Hping;
-                    $r = $hping->newPing($_GET['s']);
-                    $server = $_GET['s'];
-                    switch ($r) {
-        	            case 0:
-	                        echo ("<div class='main'><p class='status'>$server is  offline</p></div>");
-                	    break;
-                        case 1:
-                           	echo ("<div class='main'><p class='status'><a href='http://$server/'>$server</a> is online</p></div>");
-                        break;
-                       	case 2:
-                           	echo ("<div class='main'><p class='status'>This is not a valid URL</p></div>");
-                        break;
-                        case 3:
-                           	echo ("<div class="miss"><img src="hping.png"><p>We provide platform monitoring and insight into the network.</p></div>");
-						break;
-                        }
-                ?>
+        <?php
+		    $hLatency = new hLatency;
+            $r = $hLatency->newPing($_GET['s']);
+            $server = $_GET['s'];
+            switch ($r) {
+    	        case 0:
+                    echo ("<div class='main'><p class='status'>$server is  offline</p></div>");
+                break;
+                case 1:
+                 	echo ("<div class='main'><p class='status'><a href='http://$server/'>$server</a> is online</p></div>");
+                break;
+               	case 2:
+                   	echo ("<div class='main'><p class='status'>This is not a valid URL</p></div>");
+                break;
+                case 3:
+                   	echo ("<div class='miss'><img src='hping.png'><p>We provide platform monitoring and insight into the network.</p></div>");
+			    break;
+			    default:
+			    	echo $r;
+		    	break;
+            }
+        ?>
 		<!--hr />
 		<div class="left">
 			<p>Site/Design by Thesp<br />Logo by dansup</p>
