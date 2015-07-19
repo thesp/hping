@@ -1,16 +1,16 @@
 <?php
-/*
- *    /index.php
- *    Author: Thesp
- *    Version: 0.X.X
- */
-if(!isset($_GET['server'])) {
-        $_GET['server'] = "";
-}
-if(!isset($_GET['s'])) {
-        $_GET['s'] = $_GET['server'];
-}
-require_once "ping.php";
+	/*
+	*    /index.php
+	*    Author: Thesp
+	*    Version: 0.X.X
+	*/
+	if(!isset($_GET['server'])) {
+		$_GET['server'] = "";
+	}
+	if(!isset($_GET['s'])) {
+		$_GET['s'] = $_GET['server'];
+	}
+	require_once "ping.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,20 +19,22 @@ require_once "ping.php";
 		<link rel="stylesheet" type="text/css" href="./styles.css" />
 		<script type="text/javascript">
 			function cDI(d) {
-				if(d.cleared) { return; }
+				if(d.cleared) {
+					return; 
+				}
 				d.cleared = true;
 				d.value = '';
 				d.style.color = '#000000';
 			}
 		</script>
 	</head>
- <body>
+	<body>
 		<ul>
 			<li class="left">
 				<a href="."><h1>hping</h1></a>
 			</li>
 			<!--li>
-				<a class="s" href=".?s=4">FEATURES</a>
+			<a class="s" href=".?s=4">FEATURES</a>
 			</li-->
 			<li class="right">
 				<form action="" method="get" class="right">
@@ -41,63 +43,34 @@ require_once "ping.php";
 				</form>
 			</li>
 		</ul>
-        <?php
+		<?php
 			$hping = new Hping;
-            $r = $hping->newPing($_GET['s']);
-            $server = $_GET['s'];
-            switch ($r) {
-	            case 0:
-                    echo ("<div class='main'><p class='status'>This be no Man-O-War!</p></div>");
-        	    break;
-                case 1:
-                   	echo ("<div class='main'><p class='status'>Thar <a href='http://$server/'>she</a> blows!</p></div>");
-                break;
-               	case 2:
-                   	echo ("<div class='main'><p class='status'>Shiver me timbers! Swab that Poop deck!</p></div>");
-                break;
-                case 3:
-                   	echo ("<div class='miss' id='a'><img src='hping.png'><p>Yer Crow's nest in Davy Jones's Locker!</p></div>");
+			$r = $hping->newPing($_GET['s']);
+			$server = $_GET['s'];
+			switch ($r) {
+				case 0:
+					echo ("<div class='main'><p class='status'>This be no Man-O-War!</p></div>");
 				break;
-			    default:
-                    $r = round($r);
-                    echo ("<div class='main'><p class='status'>Thar <a href='http://$server/'>she</a> blows! $r clicks north!</p></div>");
-		    	break;
-                }
-            ?>
+				case 1:
+					echo ("<div class='main'><p class='status'>Thar <a href='http://$server/'>she</a> blows!</p></div>");
+				break;
+				case 2:
+					echo ("<div class='main'><p class='status'>Shiver me timbers! Swab that Poop deck!</p></div>");
+				break;
+				case 3:
+					echo ("<div class='miss' id='a'><img src='hping.png'><p>Yer Crow's nest in Davy Jones's Locker!</p></div>");
+				break;
+				default:
+					$r = round($r);
+					echo ("<div class='main'><p class='status'>Thar <a href='http://$server/'>she</a> blows! $r clicks north!</p></div>");
+				break;
+			}
+		?>
 		<!--hr />
 		<div class="left">
-			<p>Site/Design by Thesp<br />Logo by dansup</p>
+		<p>Site/Design by Thesp<br />Logo by dansup</p>
 		<div class="right">
-			<p></p>
+		<p></p>
 		</div-->
 	</body>
 </html>
-<?php
-	function clean($ip) {
-				$input = $ip;
-    if((strstr($input,'[')) && (strstr($input,']'))) {
-     $start =strpos($input, '[')+1;
-     $length = strpos($input, ']')-$start;
-     $output = substr($input, $start,$length);
-     return $output;
-    } else if ((strstr($input, 'http://'))) {
-     $start =strpos($input, '/', 6)+1;
-     $length = strlen($input)-$start;
-     if(strpos($input, '/', 8)) {
-     	$length = strpos($input, '/', 8)-$start;
-					}
-     $output = substr($input, $start,$length);
-     return $output;
-    } else {
-					return str_replace(array("http:","/","[","]"),"",$ip);
-				}
-	}
-	function check($ip) {
-		$ipp = $ip;
-		if(substr_count($ipp, ":") == 7) {
-			return "[$ipp]";
-		} else {
-			return $ip;
-		}
-	}
-?>

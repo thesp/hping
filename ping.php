@@ -1,15 +1,15 @@
 <?php
-/*
- *    /api/ping.php
- *    Author: Thesp
- *    Version: 0.X.X
- *    Returns:
- *       0 : Offline
- *       1 : Online
- *       2 : Invalid URL
- *       3 : $S not set
- */
-class hPing {
+    /*
+    *    /api/ping.php
+    *    Author: Thesp
+    *    Version: 0.X.X
+    *    Returns:
+    *       0 : Offline
+    *       1 : Online
+    *       2 : Invalid URL
+    *       3 : $S not set
+    */
+    class hPing {
         public function newPing($s) {
             if(isset($s) && $s != "") {
                 $server = $this->clean($s);
@@ -53,20 +53,20 @@ class hPing {
                 $ip =  $output;
             }
             if (strtolower(substr($ip, 0, 2)) === "fc") {
-                return $ip;
+               return $ip;
             }
             return 2;
         }
         public function resolve($url) {
-                if(isset($url)) {
-                        $result = dns_get_record($url, DNS_AAAA);
-                        if(!isset($result[0]['ipv6'])) {
-                                return "NULL";
-                        }
-                        return $result[0]['ipv6'];
-                } else {
-                        return "NULL";
-                }
+            if(isset($url)) {
+           $result = dns_get_record($url, DNS_AAAA);
+            if(!isset($result[0]['ipv6'])) {
+                return "NULL";
+            }
+                return $result[0]['ipv6'];
+            } else {
+                return "NULL";
+            }
         }
-}
+    }
 ?>
